@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bronsley Community Resource Center</title>
+<style>
+/* ============================
+   RESET & ROOT VARIABLES
+   ============================ */
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --blue:#1a4f8a;
+  --blue-dark:#0f3460;
+  --blue-light:#e8f0fb;
+  --green:#2d7a3a;
+  --green-dark:#1e5228;
+  --green-light:#e8f5eb;
+  --gold:#c8a035;
+  --cream:#f9f6f0;
+  --text:#1e2d1e;
+  --muted:#4a5e4a;
+  --radius:6px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:Georgia,serif;color:var(--text);background:#fff;font-size:15px;line-height:1.7;}
+img{max-width:100%;height:auto;}
+button{font-family:Georgia,serif;cursor:pointer;}
+
+/* ============================
+   TYPOGRAPHY
+   ============================ */
+h1{font-size:clamp(22px,5vw,42px);}
+h2{font-size:clamp(18px,4vw,26px);font-weight:700;margin-bottom:10px;}
+h3{font-size:clamp(15px,3vw,20px);font-weight:700;margin-bottom:8px;}
+p{font-size:clamp(13px,2vw,15px);line-height:1.8;color:var(--muted);}
+
+/* ============================
+   LOGO
+   ============================ */
+.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-name{display:flex;flex-direction:column;line-height:1.15;}
+.logo-top{font-size:clamp(11px,2vw,14px);font-weight:700;color:#fff;letter-spacing:1px;}
+.logo-bot{font-size:clamp(8px,1.2vw,10px);letter-spacing:1.5px;color:rgba(255,255,255,0.7);text-transform:uppercase;}
+
+/* ============================
+   NAV
+   ============================ */
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 20px;
+  background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 60%,var(--green-dark) 100%);
+  position:sticky;top:0;z-index:500;
+  box-shadow:0 2px 12px rgba(0,0,0,0.25);
+}
+.nav-links{display:flex;gap:2px;align-items:center;flex-wrap:wrap;}
+.nav-item{position:relative;}
+.nav-btn{
+  background:none;border:none;color:rgba(255,255,255,0.9);
+  font-size:clamp(9px,1.5vw,11px);font-weight:400;letter-spacing:1px;
+  padding:7px 9px;cursor:pointer;text-transform:uppercase;
+  font-family:Georgia,serif;white-space:nowrap;
+}
+.nav-btn:hover{color:#fff;}
+.dropdown{
+  display:none;position:absolute;top:100%;left:0;
+  background:var(--blue-dark);min-width:200px;
+  border-top:2px solid var(--gold);
+  box-shadow:0 6px 20px rgba(0,0,0,0.35);z-index:600;
+}
+.nav-item:hover .dropdown{display:block;}
+.dropdown a{
+  display:block;color:rgba(255,255,255,0.88);
+  font-size:11px;letter-spacing:0.8px;
+  padding:11px 16px;text-decoration:none;text-transform:uppercase;
+  border-bottom:0.5px solid rgba(255,255,255,0.08);cursor:pointer;
+}
+.dropdown a:hover{background:var(--green-dark);color:#fff;}
+.nav-donate-cta{
+  background:var(--gold);color:#fff;border:none;
+  padding:8px 14px;font-size:clamp(9px,1.5vw,11px);font-weight:700;
+  letter-spacing:1px;cursor:pointer;text-transform:uppercase;
+  margin-left:4px;font-family:Georgia,serif;border-radius:2px;
+}
+
+/* ============================
+   HAMBURGER (mobile)
+   ============================ */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  background:none;border:none;padding:6px;cursor:pointer;
+}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;transition:all 0.3s;}
+.mobile-menu{
+  display:none;background:var(--blue-dark);
+  border-top:2px solid var(--gold);padding:8px 0;
+}
+.mobile-menu.open{display:block;}
+.mobile-menu a{
+  display:block;color:rgba(255,255,255,0.88);
+  font-size:12px;letter-spacing:1px;padding:12px 20px;
+  text-decoration:none;text-transform:uppercase;
+  border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer;
+}
+.mobile-menu a:hover{background:var(--green-dark);}
+.mobile-menu .mob-section{
+  font-size:9px;letter-spacing:3px;color:var(--gold);
+  padding:12px 20px 4px;text-transform:uppercase;
+}
+.mobile-menu .mob-donate{
+  display:block;background:var(--gold);color:#fff;
+  margin:12px 16px;padding:12px;text-align:center;
+  font-size:12px;letter-spacing:1px;text-transform:uppercase;
+  cursor:pointer;border:none;font-family:Georgia,serif;width:calc(100% - 32px);
+}
+
+/* ============================
+   TICKER
+   ============================ */
+.ticker-wrap{
+  background:var(--blue-dark);padding:9px 0;
+  overflow:hidden;border-bottom:2px solid var(--gold);
+}
+.ticker-inner{
+  display:flex;animation:tick 35s linear infinite;
+  white-space:nowrap;will-change:transform;
+}
+.ticker-inner:hover{animation-play-state:paused;}
+.ticker-item{
+  display:inline-flex;align-items:center;
+  margin-right:40px;color:#fff;
+  font-size:clamp(11px,2vw,13px);letter-spacing:0.5px;
+}
+.ticker-heart{color:var(--gold);margin-right:7px;font-size:15px;}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ============================
+   HERO SLIDESHOW
+   ============================ */
+.hero{position:relative;height:clamp(320px,55vw,520px);overflow:hidden;}
+.hero-slides{display:flex;width:500%;height:100%;animation:hslide 22s infinite;}
+.hslide{
+  width:20%;height:100%;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:clamp(20px,5vw,60px);
+}
+@keyframes hslide{
+  0%,18%{transform:translateX(0)}
+  20%,38%{transform:translateX(-20%)}
+  40%,58%{transform:translateX(-40%)}
+  60%,78%{transform:translateX(-60%)}
+  80%,98%{transform:translateX(-80%)}
+  100%{transform:translateX(0)}
+}
+.htag{font-size:clamp(9px,1.5vw,11px);letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+.htitle{font-size:clamp(20px,4.5vw,42px);font-weight:700;color:#fff;line-height:1.2;max-width:640px;margin-bottom:14px;}
+.hsub{font-size:clamp(12px,2vw,15px);color:rgba(255,255,255,0.85);max-width:500px;line-height:1.7;margin-bottom:22px;}
+.hbtns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.btn-gold{
+  background:var(--gold);color:#fff;border:none;
+  padding:clamp(9px,2vw,12px) clamp(16px,3vw,26px);
+  font-size:clamp(10px,1.8vw,12px);letter-spacing:1px;
+  cursor:pointer;text-transform:uppercase;font-family:Georgia,serif;
+  border-radius:2px;transition:background 0.2s;
+}
+.btn-gold:hover{background:#b08c28;}
+.btn-outline-w{
+  background:transparent;color:#fff;
+  border:1.5px solid rgba(255,255,255,0.7);
+  padding:clamp(9px,2vw,12px) clamp(16px,3vw,26px);
+  font-size:clamp(10px,1.8vw,12px);letter-spacing:1px;
+  cursor:pointer;text-transform:uppercase;font-family:Georgia,serif;
+  border-radius:2px;transition:all 0.2s;
+}
+.btn-outline-w:hover{background:rgba(255,255,255,0.15);}
+
+/* ============================
+   PAGE SWITCHING
+   ============================ */
+.page{display:none;}
+.page.active{display:block;}
+
+/* ============================
+   SECTIONS
+   ============================ */
+.section{padding:clamp(32px,6vw,64px) clamp(16px,4vw,48px);}
+.sec-blue{background:var(--blue-dark);color:#fff;}
+.sec-blue p{color:rgba(255,255,255,0.8);}
+.sec-green{background:var(--green-dark);color:#fff;}
+.sec-green p{color:rgba(255,255,255,0.8);}
+.sec-cream{background:var(--cream);}
+.sec-blue-light{background:var(--blue-light);}
+.sec-green-light{background:var(--green-light);}
+.section-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.section-tag-w{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:10px;}
+.section-tag-g{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#6dcf82;margin-bottom:10px;}
+.divider-gold{width:44px;height:3px;background:var(--gold);margin:0 0 20px;}
+.divider-gold-c{width:44px;height:3px;background:var(--gold);margin:0 auto 20px;}
+
+/* ============================
+   GRID LAYOUTS (responsive)
+   ============================ */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px;}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px;}
+
+/* ============================
+   CARDS
+   ============================ */
+.card{background:#fff;border:0.5px solid rgba(0,0,0,0.1);padding:clamp(16px,3vw,24px);border-radius:var(--radius);}
+.card-icon{font-size:clamp(20px,3.5vw,28px);margin-bottom:10px;}
+.card-title{font-size:clamp(13px,2vw,15px);font-weight:700;margin-bottom:8px;color:var(--blue-dark);}
+.card-text{font-size:clamp(12px,1.8vw,13px);line-height:1.7;color:var(--muted);}
+
+/* ============================
+   STAT STRIP
+   ============================ */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px;}
+.stat{background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.2);padding:clamp(16px,3vw,24px) 12px;text-align:center;border-radius:var(--radius);}
+.stat-n{font-size:clamp(22px,4vw,36px);font-weight:700;color:var(--gold);}
+.stat-l{font-size:clamp(9px,1.5vw,11px);letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-top:4px;}
+
+/* ============================
+   PROGRAM CARDS
+   ============================ */
+.prog-card{background:#fff;border-left:4px solid var(--blue);padding:clamp(16px,3vw,22px);margin-bottom:12px;border-radius:0 var(--radius) var(--radius) 0;}
+.prog-title{font-size:clamp(13px,2vw,15px);font-weight:700;color:var(--blue-dark);margin-bottom:5px;}
+.prog-age{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;}
+.prog-text{font-size:clamp(12px,1.8vw,13px);line-height:1.7;color:var(--muted);}
+
+/* ============================
+   FARM PAGE
+   ============================ */
+.farm-hero{background:linear-gradient(135deg,#1e5228,#2d7a3a,#1a4f8a);padding:clamp(40px,8vw,72px) clamp(16px,4vw,48px);color:#fff;text-align:center;}
+.farm-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;}
+.farm-visual{background:linear-gradient(145deg,#2d7a3a,#1e5228);padding:36px 24px;text-align:center;min-height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:var(--radius);}
+.farm-badge{background:var(--gold);color:#fff;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;display:inline-block;margin-top:10px;border-radius:2px;}
+
+/* ============================
+   FOOD GIVEAWAY
+   ============================ */
+.give-layout{display:grid;grid-template-columns:260px 1fr;gap:32px;align-items:start;}
+.give-calendar{background:#fff;border:2px solid var(--green);overflow:hidden;margin-bottom:16px;border-radius:var(--radius);}
+.give-cal-head{background:var(--green);color:#fff;padding:14px 18px;font-size:14px;font-weight:700;letter-spacing:1px;text-align:center;}
+.give-cal-body{padding:18px;text-align:center;}
+.give-cal-num{font-size:52px;font-weight:700;color:var(--green);line-height:1;}
+.give-cal-sub{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.give-info-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;}
+.give-info{background:var(--green-light);border:0.5px solid rgba(45,122,58,0.2);padding:16px;text-align:center;border-radius:var(--radius);}
+.give-info-icon{font-size:20px;margin-bottom:7px;}
+.give-info-title{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-dark);font-weight:700;margin-bottom:4px;}
+.give-info-text{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* ============================
+   DONATE PAGE
+   ============================ */
+.donate-layout{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start;}
+.amt-row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;}
+.amt-btn{background:transparent;border:1.5px solid var(--blue);color:var(--blue);padding:8px 16px;font-size:14px;cursor:pointer;font-family:Georgia,serif;border-radius:2px;transition:all 0.2s;}
+.amt-btn.active,.amt-btn:hover{background:var(--blue);color:#fff;}
+.form-input{width:100%;padding:10px 13px;border:0.5px solid rgba(0,0,0,0.2);font-size:13px;font-family:Georgia,serif;margin-bottom:9px;background:transparent;border-radius:2px;}
+.form-input:focus{outline:2px solid var(--blue);border-color:transparent;}
+.form-check{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:13px;color:var(--muted);cursor:pointer;}
+.donate-cta{width:100%;background:var(--green);color:#fff;border:none;padding:14px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:Georgia,serif;margin-top:4px;border-radius:2px;transition:background 0.2s;}
+.donate-cta:hover{background:var(--green-dark);}
+.impact-row{display:flex;align-items:center;gap:12px;padding:13px;margin-bottom:9px;border-radius:var(--radius);}
+
+/* ============================
+   PARTNERS
+   ============================ */
+.partner-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px;}
+.partner-card{background:#fff;border:0.5px solid rgba(0,0,0,0.1);padding:24px;text-align:center;border-radius:var(--radius);}
+.partner-logo-ph{width:72px;height:72px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;}
+.partner-name{font-size:14px;font-weight:700;color:var(--blue-dark);margin-bottom:4px;}
+.partner-type{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.partner-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* ============================
+   BOARD MEMBERS
+   ============================ */
+.board-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px;}
+.board-card{background:#fff;border:0.5px solid rgba(0,0,0,0.1);padding:24px;text-align:center;border-radius:var(--radius);}
+.board-avatar{width:80px;height:80px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#fff;border:3px solid var(--gold);}
+.board-name{font-size:15px;font-weight:700;color:var(--blue-dark);margin-bottom:4px;}
+.board-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.board-bio{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* ============================
+   ANNIVERSARY
+   ============================ */
+.anni-wrap{background:linear-gradient(135deg,var(--blue-dark),var(--green-dark));padding:clamp(40px,8vw,64px) clamp(16px,4vw,48px);color:#fff;text-align:center;}
+.anni-badge{width:110px;height:110px;border:2px solid var(--gold);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 24px;}
+.anni-num{font-size:44px;font-weight:700;color:var(--gold);line-height:1;}
+.anni-yr{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.7);}
+
+/* ============================
+   ABOUT / CONTACT LAYOUTS
+   ============================ */
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:36px;align-items:start;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;}
+.bio-grid{display:grid;grid-template-columns:300px 1fr;gap:40px;align-items:start;}
+
+/* ============================
+   FOOTER
+   ============================ */
+.footer{background:var(--blue-dark);color:rgba(255,255,255,0.8);padding:clamp(32px,6vw,48px) clamp(16px,4vw,40px) 20px;}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:28px;margin-bottom:32px;}
+.footer-h{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:700;}
+.footer-p{font-size:12px;line-height:1.8;color:rgba(255,255,255,0.7);}
+.footer-a{display:block;font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none;margin-bottom:7px;cursor:pointer;}
+.footer-a:hover{color:var(--gold);}
+.footer-bot{border-top:0.5px solid rgba(255,255,255,0.1);padding-top:16px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:rgba(255,255,255,0.35);flex-wrap:wrap;gap:8px;}
+.soc-row{display:flex;gap:8px;margin-top:12px;}
+.soc{width:30px;height:30px;border:0.5px solid rgba(255,255,255,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(255,255,255,0.7);cursor:pointer;}
+
+/* ============================
+   UTILITY
+   ============================ */
+.text-center{text-align:center;}
+.quote-block{font-style:italic;border-left:3px solid var(--gold);padding-left:16px;color:var(--muted);}
+.info-box{background:var(--blue-light);border-left:4px solid var(--blue);padding:16px;border-radius:0 var(--radius) var(--radius) 0;margin-top:20px;}
+.success-box{background:var(--green);color:#fff;padding:24px;text-align:center;border-radius:var(--radius);display:none;}
+
+/* ============================
+   RESPONSIVE BREAKPOINTS
+   ============================ */
+@media(max-width:900px){
+  .grid-3{grid-template-columns:repeat(2,1fr);}
+  .grid-4{grid-template-columns:repeat(2,1fr);}
+  .stat-row{grid-template-columns:repeat(2,1fr);}
+  .farm-grid{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;}
+  .bio-grid{grid-template-columns:1fr;}
+  .donate-layout{grid-template-columns:1fr;}
+  .give-layout{grid-template-columns:1fr;}
+  .give-info-row{grid-template-columns:1fr 1fr;}
+  .partner-grid{grid-template-columns:repeat(2,1fr);}
+  .board-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:24px;}
+  .contact-grid{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .grid-3{grid-template-columns:1fr;}
+  .grid-2{grid-template-columns:1fr;}
+  .grid-4{grid-template-columns:1fr 1fr;}
+  .stat-row{grid-template-columns:1fr 1fr;}
+  .give-info-row{grid-template-columns:1fr;}
+  .partner-grid{grid-template-columns:1fr;}
+  .board-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-bot{flex-direction:column;text-align:center;}
+  .hbtns{flex-direction:column;align-items:center;}
+  .amt-row{justify-content:center;}
+  .give-layout{grid-template-columns:1fr;}
+}
+@media(max-width:400px){
+  .grid-4{grid-template-columns:1fr;}
+  .stat-row{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- ==================== TICKER ==================== -->
+<div class="ticker-wrap" aria-label="Recent donors">
+  <div class="ticker-inner" id="ticker">
+    <!-- ADD YOUR DONOR NAMES HERE — copy and paste a ticker-item for each donor -->
+    <span class="ticker-item"><span class="ticker-heart">♥</span>Your Name Here — $Amount</span>
+    <span class="ticker-item"><span class="ticker-heart">♥</span>Your Name Here — $Amount</span>
+    <span class="ticker-item"><span class="ticker-heart">♥</span>Your Name Here — $Amount</span>
+    <span class="ticker-item"><span class="ticker-heart">♥</span>Your Name Here — $Amount</span>
+    <span class="ticker-item"><span class="ticker-heart">♥</span>Your Name Here — $Amount</span>
+    <!-- DUPLICATE THE ABOVE FOR SEAMLESS LOOP -->
+    <span class="ticker-item"><span class="ticker-heart">♥</span>Your Name Here — $Amount</span>
+    <span class="ticker-item"><span class="ticker-heart">♥</span>Your Name Here — $Amount</span>
+    <span class="ticker-item"><span class="ticker-heart">♥</span>Your Name Here — $Amount</span>
+    <span class="ticker-item"><span class="ticker-heart">♥</span>Your Name Here — $Amount</span>
+    <span class="ticker-item"><span class="ticker-heart">♥</span>Your Name Here — $Amount</span>
+  </div>
+</div>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav">
+  <div class="logo-wrap" onclick="show('home')" style="cursor:pointer;">
+    <svg width="40" height="40" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-label="Bronsley Logo">
+      <circle cx="22" cy="22" r="21" fill="none" stroke="#c8a035" stroke-width="1.5"/>
+      <circle cx="22" cy="22" r="18" fill="rgba(255,255,255,0.07)"/>
+      <ellipse cx="22" cy="28" rx="9" ry="6" fill="#2d7a3a"/>
+      <rect x="19" y="16" width="2" height="14" rx="1" fill="#1e5228"/>
+      <ellipse cx="22" cy="17" rx="7" ry="5" fill="#2d7a3a"/>
+      <ellipse cx="16" cy="20" rx="5" ry="3.5" fill="#3a9648" transform="rotate(-20 16 20)"/>
+      <ellipse cx="28" cy="20" rx="5" ry="3.5" fill="#3a9648" transform="rotate(20 28 20)"/>
+      <ellipse cx="22" cy="13" rx="4" ry="3" fill="#4ab858"/>
+    </svg>
+    <div class="logo-name">
+      <span class="logo-top">BRONSLEY</span>
+      <span class="logo-bot">Community Resource Center</span>
+    </div>
+  </div>
+
+  <!-- Desktop nav -->
+  <div class="nav-links">
+    <div class="nav-item"><button class="nav-btn" onclick="show('home')">Home</button></div>
+    <div class="nav-item">
+      <button class="nav-btn">About ▾</button>
+      <div class="dropdown">
+        <a onclick="show('about')">About Us</a>
+        <a onclick="show('bio')">Founder Bio</a>
+        <a onclick="show('board')">Board Members</a>
+        <a onclick="show('mission')">Mission Statement</a>
+        <a onclick="show('partners')">Partners</a>
+        <a onclick="show('contact')">Contact</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <button class="nav-btn">Programs ▾</button>
+      <div class="dropdown">
+        <a onclick="show('programs')">All Youth Programs</a>
+        <a onclick="show('farm')">Rooted &amp; Rising Farm</a>
+        <a onclick="show('giveaway')">Monthly Food Giveaway</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <button class="nav-btn">Events ▾</button>
+      <div class="dropdown">
+        <a onclick="show('anniversary')">🎉 1-Year Anniversary</a>
+        <a onclick="show('events')">Holiday Event</a>
+      </div>
+    </div>
+    <div class="nav-item"><button class="nav-btn" onclick="show('involved')">Get Involved</button></div>
+    <button class="nav-donate-cta" onclick="show('donate')">Donate</button>
+  </div>
+
+  <!-- Mobile hamburger -->
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="show('home');closeMenu()">Home</a>
+  <div class="mob-section">About</div>
+  <a onclick="show('about');closeMenu()">About Us</a>
+  <a onclick="show('bio');closeMenu()">Founder Bio</a>
+  <a onclick="show('board');closeMenu()">Board Members</a>
+  <a onclick="show('mission');closeMenu()">Mission Statement</a>
+  <a onclick="show('partners');closeMenu()">Partners</a>
+  <a onclick="show('contact');closeMenu()">Contact</a>
+  <div class="mob-section">Programs</div>
+  <a onclick="show('programs');closeMenu()">All Youth Programs</a>
+  <a onclick="show('farm');closeMenu()">Rooted &amp; Rising Farm</a>
+  <a onclick="show('giveaway');closeMenu()">Monthly Food Giveaway</a>
+  <div class="mob-section">Events</div>
+  <a onclick="show('anniversary');closeMenu()">🎉 1-Year Anniversary</a>
+  <a onclick="show('events');closeMenu()">Holiday Event</a>
+  <a onclick="show('involved');closeMenu()">Get Involved</a>
+  <button class="mob-donate" onclick="show('donate');closeMenu()">Donate</button>
+</div>
+
+<!-- ==================== HOME ==================== -->
+<div class="page active" id="page-home">
+  <div class="hero" role="banner">
+    <div class="hero-slides">
+      <div class="hslide" style="background:linear-gradient(135deg,#0f3460,#1a4f8a);">
+        <div class="htag">Bronsley Community Resource Center · Los Angeles</div>
+        <h1 class="htitle">Empowering Youth, Enriching Our Community</h1>
+        <p class="hsub">Mentorship, monthly food giveaways, urban farming, and programs — rooted in love for LA.</p>
+        <div class="hbtns"><button class="btn-gold" onclick="show('donate')">Donate Now</button><button class="btn-outline-w" onclick="show('programs')">Our Programs</button></div>
+      </div>
+      <div class="hslide" style="background:linear-gradient(135deg,#1e5228,#2d7a3a);">
+        <div class="htag">Rooted &amp; Rising Farm</div>
+        <h1 class="htitle">Growing Healthy Food for Our Community</h1>
+        <p class="hsub">Youth learn to grow, harvest, and share fresh produce through our urban community farm.</p>
+        <div class="hbtns"><button class="btn-gold" onclick="show('farm')">Visit the Farm</button><button class="btn-outline-w" onclick="show('involved')">Volunteer</button></div>
+      </div>
+      <div class="hslide" style="background:linear-gradient(135deg,#0f3460,#1e5228);">
+        <div class="htag">3rd Saturday Every Month</div>
+        <h1 class="htitle">Community Food Giveaway — Everyone Welcome</h1>
+        <p class="hsub">Free groceries for LA families every third Saturday. No paperwork, no barriers — just community.</p>
+        <div class="hbtns"><button class="btn-gold" onclick="show('giveaway')">Get Details</button><button class="btn-outline-w" onclick="show('involved')">Help Out</button></div>
+      </div>
+      <div class="hslide" style="background:linear-gradient(135deg,#1a4f8a,#2d7a3a);">
+        <div class="htag">Celebrating 1 Year of Impact</div>
+        <h1 class="htitle">5,000+ Lives Changed — Help Us Keep Going</h1>
+        <p class="hsub">Our first anniversary is here. Donate to fuel year two and help us reach even more families.</p>
+        <div class="hbtns"><button class="btn-gold" onclick="show('anniversary')">Our Anniversary</button><button class="btn-outline-w" onclick="show('donate')">Make a Gift</button></div>
+      </div>
+      <div class="hslide" style="background:linear-gradient(135deg,#0f3460,#8B6914);">
+        <div class="htag">Youth Programs</div>
+        <h1 class="htitle">Skills, Mentorship &amp; Opportunity for Every Young Person</h1>
+        <p class="hsub">From tutoring to leadership training — investing in the next generation of LA leaders.</p>
+        <div class="hbtns"><button class="btn-gold" onclick="show('programs')">See All Programs</button><button class="btn-outline-w" onclick="show('donate')">Support a Youth</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section sec-cream text-center">
+    <div class="section-tag">What We Do</div>
+    <h2>Community Empowerment Programs</h2>
+    <div class="divider-gold-c"></div>
+    <p style="max-width:640px;margin:0 auto 24px;">Bronsley serves youth and families across Los Angeles through hands-on programs, monthly food distribution, and our Rooted &amp; Rising urban farm.</p>
+    <div class="grid-3">
+      <div class="card"><div class="card-icon">🌱</div><div class="card-title">Rooted &amp; Rising Farm</div><div class="card-text">Youth grow fresh produce in our urban farm, learning sustainability and feeding their neighbors.</div></div>
+      <div class="card"><div class="card-icon">🛒</div><div class="card-title">Monthly Food Giveaway</div><div class="card-text">Every 3rd Saturday — free groceries for families in need. No barriers, all welcome.</div></div>
+      <div class="card"><div class="card-icon">🎓</div><div class="card-title">Youth Programs</div><div class="card-text">Tutoring, mentorship, leadership, and life skills — building capable young Angelenos.</div></div>
+    </div>
+  </div>
+
+  <div class="section sec-blue text-center">
+    <div class="section-tag-w">First Year Impact</div>
+    <h2 style="color:#fff;">Making a Difference in Los Angeles</h2>
+    <div class="divider-gold-c"></div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-n">5,000+</div><div class="stat-l">People Served</div></div>
+      <div class="stat"><div class="stat-n">12</div><div class="stat-l">Food Giveaways</div></div>
+      <div class="stat"><div class="stat-n">1</div><div class="stat-l">Urban Farm</div></div>
+      <div class="stat"><div class="stat-n">1 yr</div><div class="stat-l">Of Impact</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== ABOUT ==================== -->
+<div class="page" id="page-about">
+  <div class="section sec-blue-light">
+    <div class="section-tag">Who We Are</div>
+    <h2>About Bronsley Community Resource Center</h2>
+    <div class="divider-gold"></div>
+    <div class="about-grid">
+      <div>
+        <p style="margin-bottom:14px;">Bronsley Community Resource Center is dedicated to supporting and empowering young people in Los Angeles through collaboration with local schools, organizations, and volunteers. Our center hosts monthly community grocery giveaways and maintains our Rooted &amp; Rising urban community farm.</p>
+        <p style="margin-bottom:14px;">Our team is passionate about our mission and the positive impact we strive to create. We are grateful for the support of our volunteers, donors, and community partners who make this work possible.</p>
+        <p style="margin-bottom:22px;">We believe every young person deserves access to mentorship, nutritious food, and the skills they need to thrive. Join us in creating a brighter future for the next generation.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn-gold" onclick="show('bio')">Meet the Founder</button>
+          <button style="background:transparent;border:1.5px solid var(--blue);color:var(--blue);padding:10px 20px;font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:Georgia,serif;border-radius:2px;" onclick="show('mission')">Our Mission</button>
+        </div>
+      </div>
+      <div style="background:var(--blue-dark);padding:24px;color:#fff;border-radius:var(--radius);">
+        <div class="section-tag-w" style="margin-bottom:12px;">Contact Us</div>
+        <p style="font-size:13px;color:rgba(255,255,255,0.85);margin-bottom:8px;">📞 1-(424) 480-9336</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.85);margin-bottom:8px;">📍 401 E. Hillcrest, Unit K<br>&nbsp;&nbsp;&nbsp;&nbsp;Inglewood, CA 90301</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.85);margin-bottom:20px;">📸 @bronsleyla</p>
+        <button class="btn-gold" style="width:100%;" onclick="show('contact')">Send a Message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FOUNDER BIO ==================== -->
+<div class="page" id="page-bio">
+  <div class="section sec-cream">
+    <div class="bio-grid">
+      <div style="background:linear-gradient(145deg,var(--blue),var(--green-dark));padding:clamp(28px,5vw,48px) 28px;text-align:center;color:#fff;border-radius:var(--radius);">
+        <div style="font-size:clamp(48px,8vw,72px);font-weight:300;margin-bottom:8px;">B</div>
+        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:0.7;">Founder Photo</div>
+        <div style="margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.2);font-size:12px;line-height:1.7;opacity:0.85;">Founder &amp; Executive Director<br>Bronsley Community Resource Center</div>
+      </div>
+      <div>
+        <div class="section-tag">Founder &amp; Executive Director</div>
+        <h2>A Heart for the Community</h2>
+        <div class="divider-gold"></div>
+        <p style="margin-bottom:14px;">The founder of Bronsley Community Resource Center grew up witnessing the inequities faced by young people in Los Angeles — unequal access to mentorship, nutritious food, and safe spaces to grow. Driven by a deep belief that every child deserves the opportunity to thrive, she set out to build something lasting in the heart of the community she loves.</p>
+        <p style="margin-bottom:14px;">With a background in community organizing, youth advocacy, and nonprofit leadership, she launched Bronsley in 2024 with a clear vision: create a center where Los Angeles youth could access real resources, real mentors, and real hope. In just one year, Bronsley has served over 5,000 people across the greater LA area.</p>
+        <p style="margin-bottom:14px;">From organizing monthly grocery giveaways to building the Rooted &amp; Rising urban farm that reconnects youth with the land, the founder's heart is in every program Bronsley offers. She believes in meeting people where they are, listening before acting, and building bridges across schools, families, and organizations.</p>
+        <p class="quote-block">"This community gave me everything. Bronsley is my way of giving it back — not just for today, but for every generation that comes after us."</p>
+        <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn-gold" onclick="show('board')">Meet the Board</button>
+          <button class="btn-gold" onclick="show('mission')" style="background:var(--green);">Our Mission</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== BOARD MEMBERS ==================== -->
+<div class="page" id="page-board">
+  <div class="section sec-blue-light">
+    <div class="section-tag">Leadership</div>
+    <h2>Board of Directors</h2>
+    <div class="divider-gold"></div>
+    <p style="max-width:640px;margin-bottom:28px;">Our board is composed of dedicated community leaders, professionals, and advocates who are committed to Bronsley's mission and the long-term well-being of Los Angeles youth.</p>
+    <div class="board-grid">
+      <!-- BOARD MEMBER 1 — Edit name, title, and bio below -->
+      <div class="board-card">
+        <div class="board-avatar" style="background:var(--blue);">BM</div>
+        <div class="board-name">Board Member Name</div>
+        <div class="board-title">Board Chair</div>
+        <p class="board-bio">Add a short biography or background description for this board member here. Include their professional background and connection to the mission.</p>
+      </div>
+      <!-- BOARD MEMBER 2 -->
+      <div class="board-card">
+        <div class="board-avatar" style="background:var(--green);">BM</div>
+        <div class="board-name">Board Member Name</div>
+        <div class="board-title">Vice Chair</div>
+        <p class="board-bio">Add a short biography or background description for this board member here. Include their professional background and connection to the mission.</p>
+      </div>
+      <!-- BOARD MEMBER 3 -->
+      <div class="board-card">
+        <div class="board-avatar" style="background:var(--gold);">BM</div>
+        <div class="board-name">Board Member Name</div>
+        <div class="board-title">Treasurer</div>
+        <p class="board-bio">Add a short biography or background description for this board member here. Include their professional background and connection to the mission.</p>
+      </div>
+      <!-- BOARD MEMBER 4 -->
+      <div class="board-card">
+        <div class="board-avatar" style="background:var(--blue-dark);">BM</div>
+        <div class="board-name">Board Member Name</div>
+        <div class="board-title">Secretary</div>
+        <p class="board-bio">Add a short biography or background description for this board member here. Include their professional background and connection to the mission.</p>
+      </div>
+      <!-- BOARD MEMBER 5 -->
+      <div class="board-card">
+        <div class="board-avatar" style="background:var(--green-dark);">BM</div>
+        <div class="board-name">Board Member Name</div>
+        <div class="board-title">Board Member</div>
+        <p class="board-bio">Add a short biography or background description for this board member here. Include their professional background and connection to the mission.</p>
+      </div>
+      <!-- BOARD MEMBER 6 -->
+      <div class="board-card">
+        <div class="board-avatar" style="background:#7b3fa0;">BM</div>
+        <div class="board-name">Board Member Name</div>
+        <div class="board-title">Board Member</div>
+        <p class="board-bio">Add a short biography or background description for this board member here. Include their professional background and connection to the mission.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:28px;">
+      <p style="max-width:500px;margin:0 auto 16px;font-size:13px;">Interested in joining Bronsley's Board of Directors? We welcome leaders who share our passion for community empowerment.</p>
+      <button class="btn-gold" onclick="show('contact')">Inquire About Board Service</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MISSION ==================== -->
+<div class="page" id="page-mission">
+  <div class="section sec-blue text-center">
+    <div class="section-tag-w">Why We Exist</div>
+    <h2 style="color:#fff;">Our Mission Statement</h2>
+    <div class="divider-gold-c"></div>
+    <p style="font-size:clamp(15px,2.5vw,20px);font-style:italic;color:#fff;max-width:680px;margin:0 auto 20px;line-height:1.6;">"To empower youth and enrich the Los Angeles community by providing access to mentorship, essential resources, and safe spaces where every person can grow, learn, serve, and succeed."</p>
+    <p style="max-width:620px;margin:0 auto 14px;">Bronsley exists because we believe in the dignity and potential of every young person in our city. We are not just a resource center — we are a movement built on love, accountability, and community.</p>
+    <p style="max-width:620px;margin:0 auto 32px;">We measure our success in lives transformed — in the child who finds a mentor, the family that eats well this week, and the teenager who grows their first tomato in our Rooted &amp; Rising farm.</p>
+    <div class="grid-4" style="max-width:600px;margin:0 auto;">
+      <div style="border:1px solid rgba(255,255,255,0.2);padding:18px 10px;text-align:center;border-radius:var(--radius);"><div style="font-size:22px;margin-bottom:7px;">🌱</div><div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.85);">Growth</div></div>
+      <div style="border:1px solid rgba(255,255,255,0.2);padding:18px 10px;text-align:center;border-radius:var(--radius);"><div style="font-size:22px;margin-bottom:7px;">🤝</div><div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.85);">Community</div></div>
+      <div style="border:1px solid rgba(255,255,255,0.2);padding:18px 10px;text-align:center;border-radius:var(--radius);"><div style="font-size:22px;margin-bottom:7px;">💙</div><div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.85);">Compassion</div></div>
+      <div style="border:1px solid rgba(255,255,255,0.2);padding:18px 10px;text-align:center;border-radius:var(--radius);"><div style="font-size:22px;margin-bottom:7px;">✊</div><div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.85);">Empowerment</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PROGRAMS ==================== -->
+<div class="page" id="page-programs">
+  <div class="section sec-blue-light">
+    <div class="section-tag">What We Offer</div>
+    <h2>Youth Programs</h2>
+    <div class="divider-gold"></div>
+    <p style="max-width:660px;margin-bottom:28px;">All Bronsley programs are free, community-driven, and designed to meet youth where they are.</p>
+    <div class="prog-card"><div class="prog-age">Ages 6–12 · After School</div><div class="prog-title">Homework Help &amp; Tutoring</div><p class="prog-text">Certified tutors and volunteer mentors provide weekly academic support in reading, math, and science — in partnership with local schools.</p></div>
+    <div class="prog-card"><div class="prog-age">Ages 13–18 · Saturdays</div><div class="prog-title">Youth Leadership Academy</div><p class="prog-text">A semester-long leadership program teaching public speaking, civic engagement, financial literacy, and community organizing. Graduates receive a certificate and mentorship stipend.</p></div>
+    <div class="prog-card"><div class="prog-age">Ages 10–18 · Year-Round</div><div class="prog-title">Rooted &amp; Rising Farm Program</div><p class="prog-text">Youth plant, tend, and harvest fresh produce that feeds our community. Combines environmental education with food justice work.</p></div>
+    <div class="prog-card"><div class="prog-age">Ages 14–24 · Ongoing</div><div class="prog-title">Mentorship &amp; Career Pathways</div><p class="prog-text">One-on-one mentoring with professionals in healthcare, tech, education, and trades. Includes job shadowing and internship connections.</p></div>
+    <div class="prog-card"><div class="prog-age">All Ages · Monthly</div><div class="prog-title">Arts &amp; Creative Expression</div><p class="prog-text">Monthly workshops in visual art, spoken word, music, and photography — a safe space for youth to discover their creative voice.</p></div>
+    <div class="prog-card"><div class="prog-age">Families · Monthly</div><div class="prog-title">Community Food Giveaway</div><p class="prog-text">Every 3rd Saturday, youth volunteers help distribute essential groceries and connect neighbors to Bronsley resources.</p></div>
+    <div style="margin-top:24px;"><button class="btn-gold" onclick="show('involved')">Volunteer or Enroll a Youth</button></div>
+  </div>
+</div>
+
+<!-- ==================== FARM ==================== -->
+<div class="page" id="page-farm">
+  <div class="farm-hero">
+    <div class="section-tag-g">Urban Community Agriculture</div>
+    <h2 style="color:#fff;font-size:clamp(22px,5vw,34px);">Rooted &amp; Rising Farm</h2>
+    <div class="divider-gold-c"></div>
+    <p style="color:rgba(255,255,255,0.85);max-width:560px;margin:0 auto;font-size:clamp(13px,2vw,15px);">Where Los Angeles youth learn to grow healthy food, care for the earth, and feed their community — a living classroom and source of fresh produce for families across the city.</p>
+  </div>
+
+  <div class="section sec-green-light">
+    <div class="farm-grid">
+      <div>
+        <div class="section-tag">About the Farm</div>
+        <h2>Growing More Than Food</h2>
+        <div class="divider-gold"></div>
+        <p style="margin-bottom:14px;">The Rooted &amp; Rising Farm is Bronsley's urban community farm — a hands-on space where youth ages 10–18 learn to plant, tend, and harvest fresh fruits, vegetables, and herbs. All produce is grown organically and distributed free at our monthly food giveaway.</p>
+        <p style="margin-bottom:14px;">More than agriculture, the farm is a space for healing, connection, and education. Young people learn about food justice, environmental stewardship, nutrition, and the deep relationship between land and community wellness.</p>
+        <p style="margin-bottom:22px;">Youth who complete the full growing season earn a Rooted &amp; Rising certificate and are invited back as junior farm leaders the following year.</p>
+        <button class="btn-gold" onclick="show('involved')">Join the Farm Program</button>
+      </div>
+      <div>
+        <div class="farm-visual">
+          <div style="font-size:clamp(40px,8vw,64px);margin-bottom:10px;">🌿</div>
+          <div style="font-size:clamp(14px,2.5vw,18px);font-weight:700;color:#fff;margin-bottom:5px;">Rooted &amp; Rising</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.75);letter-spacing:1px;">Urban Community Farm</div>
+          <div class="farm-badge">Est. 2024 · Inglewood / Los Angeles</div>
+        </div>
+        <div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div style="background:var(--green-dark);color:#fff;padding:14px;text-align:center;border-radius:var(--radius);"><div style="font-size:22px;">🥦</div><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-top:4px;">Vegetables</div></div>
+          <div style="background:var(--green-dark);color:#fff;padding:14px;text-align:center;border-radius:var(--radius);"><div style="font-size:22px;">🍓</div><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-top:4px;">Fruits</div></div>
+          <div style="background:var(--green-dark);color:#fff;padding:14px;text-align:center;border-radius:var(--radius);"><div style="font-size:22px;">🌿</div><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-top:4px;">Herbs</div></div>
+          <div style="background:var(--green-dark);color:#fff;padding:14px;text-align:center;border-radius:var(--radius);"><div style="font-size:22px;">🌻</div><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-top:4px;">Pollinators</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section sec-green text-center">
+    <div class="section-tag-g">Youth Agriculture Education</div>
+    <h2 style="color:#fff;">What Youth Learn at the Farm</h2>
+    <div class="divider-gold-c"></div>
+    <div class="grid-3">
+      <div class="card"><div class="card-icon">🌱</div><div class="card-title" style="color:var(--green-dark);">Planting &amp; Growing</div><div class="card-text">Seed selection, soil health, composting, and sustainable techniques for urban environments.</div></div>
+      <div class="card"><div class="card-icon">🥗</div><div class="card-title" style="color:var(--green-dark);">Nutrition &amp; Food Justice</div><div class="card-text">Understanding healthy eating, food deserts, and why equitable food access is a community right.</div></div>
+      <div class="card"><div class="card-icon">🌍</div><div class="card-title" style="color:var(--green-dark);">Environmental Stewardship</div><div class="card-text">Water conservation, pollinator protection, and the role urban farms play in a sustainable city.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FOOD GIVEAWAY ==================== -->
+<div class="page" id="page-giveaway">
+  <div class="section sec-green text-center">
+    <div class="section-tag-g">Free for All · No Questions Asked</div>
+    <h2 style="color:#fff;">Monthly Community Food Giveaway</h2>
+    <div class="divider-gold-c"></div>
+    <p style="max-width:560px;margin:0 auto;font-size:clamp(13px,2vw,15px);">Every third Saturday of the month, Bronsley opens its doors to distribute free groceries to families and individuals. No ID, no paperwork, no barriers — just community.</p>
+  </div>
+
+  <div class="section sec-cream">
+    <div class="give-layout">
+      <div>
+        <div class="give-calendar">
+          <div class="give-cal-head">📅 Every Month</div>
+          <div class="give-cal-body">
+            <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;">3rd Saturday</div>
+            <div class="give-cal-num">3rd</div>
+            <div class="give-cal-sub" style="margin-top:5px;">Saturday of Every Month</div>
+            <div style="margin-top:14px;padding-top:14px;border-top:0.5px solid rgba(0,0,0,0.08);">
+              <p style="font-size:12px;color:var(--muted);">📍 401 E. Hillcrest, Unit K<br>Inglewood, CA 90301</p>
+              <p style="font-size:12px;color:var(--muted);margin-top:7px;">🕙 10:00 AM – While Supplies Last</p>
+            </div>
+          </div>
+        </div>
+        <button class="btn-gold" style="width:100%;" onclick="show('involved')">Volunteer at a Giveaway</button>
+      </div>
+      <div>
+        <div class="section-tag">What to Expect</div>
+        <h2>How It Works</h2>
+        <div class="divider-gold"></div>
+        <p style="margin-bottom:18px;">Our monthly food giveaway is one of Bronsley's most beloved community touchpoints. Volunteers and staff work together to distribute food and celebrate with the neighbors we serve.</p>
+        <div class="give-info-row">
+          <div class="give-info"><div class="give-info-icon">🚪</div><div class="give-info-title">Open to All</div><div class="give-info-text">No ID, income verification, or registration. Everyone is welcome.</div></div>
+          <div class="give-info"><div class="give-info-icon">🛒</div><div class="give-info-title">Fresh Groceries</div><div class="give-info-text">Produce, pantry staples, and seasonal items — including fresh harvest from our Rooted &amp; Rising farm.</div></div>
+          <div class="give-info"><div class="give-info-icon">🤝</div><div class="give-info-title">Community First</div><div class="give-info-text">Connect with programs, volunteer opportunities, and other community resources.</div></div>
+        </div>
+        <div class="info-box">
+          <div style="font-size:11px;font-weight:700;color:var(--blue-dark);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;">📞 Questions?</div>
+          <p style="font-size:13px;">Call <strong>1-(424) 480-9336</strong> or follow <strong>@bronsleyla</strong> on Instagram for monthly reminders.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PARTNERS ==================== -->
+<div class="page" id="page-partners">
+  <div class="section sec-blue-light">
+    <div class="section-tag">Our Community</div>
+    <h2>Partners &amp; Supporters</h2>
+    <div class="divider-gold"></div>
+    <p style="max-width:620px;margin-bottom:28px;">Bronsley's work is made possible through the support of our community partners — organizations, schools, businesses, and faith communities who share our commitment to empowering Los Angeles youth.</p>
+    <div class="partner-grid">
+      <div class="partner-card"><div class="partner-logo-ph" style="background:var(--blue);">LA</div><div class="partner-name">LAUSD Local Schools</div><div class="partner-type">Education Partner</div><div class="partner-desc">Collaborating on after-school tutoring and mentorship pipelines connecting students to Bronsley programs.</div></div>
+      <div class="partner-card"><div class="partner-logo-ph" style="background:var(--green);">🏪</div><div class="partner-name">Local Grocery Partners</div><div class="partner-type">Food Access</div><div class="partner-desc">Providing donated and discounted groceries for our monthly community food giveaway.</div></div>
+      <div class="partner-card"><div class="partner-logo-ph" style="background:#8B4513;">⛪</div><div class="partner-name">Faith Community Network</div><div class="partner-type">Community Anchor</div><div class="partner-desc">Churches and faith organizations who volunteer, host events, and spread the word about Bronsley's mission.</div></div>
+      <div class="partner-card"><div class="partner-logo-ph" style="background:#5a2d82;">🏢</div><div class="partner-name">Corporate Sponsors</div><div class="partner-type">Funding &amp; Mentorship</div><div class="partner-desc">LA-based businesses providing financial support and employee volunteers for programs and farm days.</div></div>
+      <div class="partner-card"><div class="partner-logo-ph" style="background:var(--gold);">🌾</div><div class="partner-name">Urban Agriculture Alliance</div><div class="partner-type">Farm Partner</div><div class="partner-desc">Providing seeds, soil expertise, and training for our Rooted &amp; Rising Farm program leaders.</div></div>
+      <div class="partner-card"><div class="partner-logo-ph" style="background:var(--blue-dark);">+</div><div class="partner-name">Become a Partner</div><div class="partner-type">Open to Organizations</div><div class="partner-desc">We welcome partnerships with businesses, schools, nonprofits, and community groups. Reach out today.</div></div>
+    </div>
+    <div style="text-align:center;margin-top:28px;"><button class="btn-gold" onclick="show('contact')">Become a Partner</button></div>
+  </div>
+</div>
+
+<!-- ==================== ANNIVERSARY ==================== -->
+<div class="page" id="page-anniversary">
+  <div class="anni-wrap">
+    <div class="anni-badge"><div class="anni-num">1</div><div class="anni-yr">Year</div></div>
+    <div class="section-tag-w">We Did It Together</div>
+    <h2 style="color:#fff;font-size:clamp(20px,4vw,30px);">Celebrating One Year of Impact</h2>
+    <div class="divider-gold-c"></div>
+    <p style="max-width:580px;margin:0 auto 24px;font-size:clamp(13px,2vw,15px);">One year ago, Bronsley opened its doors with a bold dream. Today, we have served over 5,000 people, run 12 food giveaways, launched the Rooted &amp; Rising Farm, and changed lives across Los Angeles.</p>
+    <div class="stat-row" style="max-width:640px;margin:0 auto 32px;">
+      <div class="stat"><div class="stat-n">5,000+</div><div class="stat-l">People Served</div></div>
+      <div class="stat"><div class="stat-n">12</div><div class="stat-l">Giveaways</div></div>
+      <div class="stat"><div class="stat-n">1</div><div class="stat-l">Urban Farm</div></div>
+      <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Hearts Touched</div></div>
+    </div>
+    <p style="max-width:500px;margin:0 auto 24px;">Help us step into year two strong. Your gift — at any level — keeps the mission alive.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn-gold" onclick="show('donate')">Make a Gift</button>
+      <button class="btn-outline-w" onclick="show('involved')">Get Involved</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== EVENTS ==================== -->
+<div class="page" id="page-events">
+  <div class="section sec-cream">
+    <div class="section-tag">Mark Your Calendar</div>
+    <h2>Events</h2>
+    <div class="divider-gold"></div>
+    <div class="grid-3">
+      <div class="card"><div class="card-icon">🎉</div><div class="card-title">1-Year Anniversary</div><div class="card-text" style="margin-bottom:12px;">Celebrate Bronsley's first year and 5,000+ lives impacted. Donate to fuel year two.</div><button class="btn-gold" style="font-size:11px;padding:8px 14px;" onclick="show('anniversary')">Details</button></div>
+      <div class="card"><div class="card-icon">🎄</div><div class="card-title">Bronsley Holiday Celebration</div><div class="card-text" style="margin-bottom:12px;">Our annual holiday gathering — food, community, and celebration. Sponsorships available.</div><button class="btn-gold" style="font-size:11px;padding:8px 14px;">View Event</button></div>
+      <div class="card"><div class="card-icon">🛒</div><div class="card-title">Monthly Food Giveaway</div><div class="card-text" style="margin-bottom:12px;">Every 3rd Saturday. Free groceries. 401 E. Hillcrest, Unit K, Inglewood, CA.</div><button class="btn-gold" style="font-size:11px;padding:8px 14px;" onclick="show('giveaway')">Learn More</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== GET INVOLVED ==================== -->
+<div class="page" id="page-involved">
+  <div class="section sec-blue-light">
+    <div class="section-tag">Join the Movement</div>
+    <h2>Get Involved</h2>
+    <div class="divider-gold"></div>
+    <div class="grid-3" style="margin-bottom:24px;">
+      <div class="card"><div class="card-icon">👩‍🏫</div><div class="card-title">Mentor a Youth</div><div class="card-text">Share your professional skills and life experience with a young Angeleno. Applications accepted year-round.</div></div>
+      <div class="card"><div class="card-icon">🌱</div><div class="card-title">Farm Volunteer</div><div class="card-text">Help plant, tend, and harvest at Rooted &amp; Rising Farm. Open to individuals and corporate groups.</div></div>
+      <div class="card"><div class="card-icon">🛒</div><div class="card-title">Food Giveaway Crew</div><div class="card-text">Assist with monthly grocery distribution every 3rd Saturday. A few hours feeds dozens of families.</div></div>
+    </div>
+    <div style="text-align:center;"><button class="btn-gold" onclick="show('contact')">Sign Up to Volunteer</button></div>
+  </div>
+</div>
+
+<!-- ==================== DONATE ==================== -->
+<div class="page" id="page-donate">
+  <div class="section sec-blue text-center">
+    <div class="section-tag-w">Make a Difference</div>
+    <h2 style="color:#fff;">Support Bronsley</h2>
+    <div class="divider-gold-c"></div>
+    <p style="max-width:520px;margin:0 auto;">Your donation funds grocery giveaways, the Rooted &amp; Rising Farm, youth mentorship, and free community programs across Los Angeles.</p>
+  </div>
+
+  <div class="section sec-cream">
+    <div class="donate-layout">
+      <!-- LEFT: Form -->
+      <div>
+        <div class="section-tag">Your Gift</div>
+        <h3>Choose an Amount</h3>
+        <div class="divider-gold"></div>
+        <div class="amt-row">
+          <button class="amt-btn active" onclick="setAmt(this,'25')">$25</button>
+          <button class="amt-btn" onclick="setAmt(this,'50')">$50</button>
+          <button class="amt-btn" onclick="setAmt(this,'100')">$100</button>
+          <button class="amt-btn" onclick="setAmt(this,'250')">$250</button>
+          <button class="amt-btn" onclick="setAmt(this,'500')">$500</button>
+          <button class="amt-btn" onclick="setAmt(this,'other')">Other</button>
+        </div>
+        <div id="other-amt-wrap" style="display:none;margin-bottom:12px;">
+          <input class="form-input" type="number" placeholder="Enter custom amount ($)" style="max-width:220px;">
+        </div>
+        <div style="margin:18px 0 10px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--blue-dark);">Your Information</div>
+        <input class="form-input" type="text" placeholder="First Name">
+        <input class="form-input" type="text" placeholder="Last Name">
+        <input class="form-input" type="email" placeholder="Email Address (for thank-you receipt)">
+        <input class="form-input" type="tel" placeholder="Phone (optional)">
+        <label class="form-check">
+          <input type="checkbox" id="anon-chk" onchange="toggleAnon()" style="width:16px;height:16px;accent-color:var(--green);flex-shrink:0;">
+          List me as <strong style="margin:0 4px;">Anonymous</strong> on the donor ticker
+        </label>
+        <div id="display-name-wrap">
+          <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">How should your name appear on the donor ticker?</div>
+          <input class="form-input" type="text" placeholder="e.g. Maria G., The Johnson Family, or Anonymous">
+        </div>
+        <div style="margin:14px 0 8px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--blue-dark);">Message (optional)</div>
+        <textarea class="form-input" rows="3" placeholder="Share why you're giving or leave an encouraging word..." style="resize:vertical;"></textarea>
+        <button class="donate-cta" onclick="submitDonation()">Donate Securely — Keep the Mission Alive</button>
+        <p style="font-size:11px;color:var(--muted);margin-top:8px;text-align:center;">🔒 Secure · Bronsley is a registered nonprofit · May be tax-deductible</p>
+      </div>
+
+      <!-- RIGHT: Impact -->
+      <div>
+        <div class="section-tag">Your Impact</div>
+        <h3>What Your Gift Does</h3>
+        <div class="divider-gold"></div>
+        <div class="impact-row" style="background:var(--blue-light);"><span style="font-size:22px;">🛒</span><div><div style="font-size:13px;font-weight:700;color:var(--blue-dark);">$25 — Feeds one family</div><div style="font-size:12px;color:var(--muted);">Full grocery bag at our monthly giveaway</div></div></div>
+        <div class="impact-row" style="background:var(--green-light);"><span style="font-size:22px;">🌱</span><div><div style="font-size:13px;font-weight:700;color:var(--green-dark);">$50 — Seeds the farm</div><div style="font-size:12px;color:var(--muted);">One month of Rooted &amp; Rising supplies</div></div></div>
+        <div class="impact-row" style="background:var(--blue-light);"><span style="font-size:22px;">🎓</span><div><div style="font-size:13px;font-weight:700;color:var(--blue-dark);">$100 — Sponsors a youth</div><div style="font-size:12px;color:var(--muted);">One young person's program costs for a month</div></div></div>
+        <div class="impact-row" style="background:var(--green-light);"><span style="font-size:22px;">🤝</span><div><div style="font-size:13px;font-weight:700;color:var(--green-dark);">$500 — Powers a giveaway</div><div style="font-size:12px;color:var(--muted);">Full monthly food distribution event</div></div></div>
+
+        <div style="background:var(--blue-dark);padding:18px;border-radius:var(--radius);margin-top:8px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Recent Donors</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.8);line-height:2.2;" id="donor-wall">
+            <!-- Add donor names here -->
+            ♥ Add donor names here<br>
+            ♥ Add donor names here<br>
+            ♥ Add donor names here
+          </div>
+          <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,0.45);font-style:italic;">Your name will appear here and in the live ticker after donating.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="success-box" id="donate-success">
+    <div style="font-size:28px;margin-bottom:8px;">💙</div>
+    <h3 style="margin-bottom:8px;">Thank you for your gift!</h3>
+    <p style="font-size:14px;opacity:0.9;color:#fff;">A thank-you receipt is on its way to your email. Your generosity helps keep Bronsley's mission alive.</p>
+  </div>
+</div>
+
+<!-- ==================== CONTACT ==================== -->
+<div class="page" id="page-contact">
+  <div class="section sec-cream">
+    <div class="section-tag">Reach Out</div>
+    <h2>Contact Us</h2>
+    <div class="divider-gold"></div>
+    <div class="contact-grid">
+      <div>
+        <p style="margin-bottom:18px;">We'd love to hear from you — whether you want to volunteer, partner with Bronsley, or learn more about our programs.</p>
+        <p style="font-size:13px;margin-bottom:8px;">📞 <strong>1-(424) 480-9336</strong></p>
+        <p style="font-size:13px;margin-bottom:8px;">📍 <strong>401 E. Hillcrest, Unit K</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;Inglewood, CA 90301</p>
+        <p style="font-size:13px;margin-bottom:20px;">📸 <strong>@bronsleyla</strong> on Instagram</p>
+        <div style="background:var(--green-light);border-left:4px solid var(--green);padding:16px;border-radius:0 var(--radius) var(--radius) 0;">
+          <p style="font-size:13px;color:var(--green-dark);">Monthly food giveaway is held every <strong>3rd Saturday</strong> at our Inglewood location. All are welcome — no registration required.</p>
+        </div>
+      </div>
+      <div>
+        <input class="form-input" type="text" placeholder="Your Name">
+        <input class="form-input" type="email" placeholder="Email Address">
+        <input class="form-input" type="text" placeholder="Subject">
+        <textarea class="form-input" rows="5" placeholder="Your message..." style="resize:vertical;"></textarea>
+        <button class="btn-gold" style="width:100%;padding:12px;">Send Message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="logo-wrap" onclick="show('home')" style="cursor:pointer;margin-bottom:12px;">
+        <svg width="32" height="32" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="22" cy="22" r="21" fill="none" stroke="#c8a035" stroke-width="1.5"/>
+          <ellipse cx="22" cy="28" rx="9" ry="6" fill="#2d7a3a"/>
+          <rect x="19" y="16" width="2" height="14" rx="1" fill="#1e5228"/>
+          <ellipse cx="22" cy="17" rx="7" ry="5" fill="#2d7a3a"/>
+          <ellipse cx="16" cy="20" rx="5" ry="3.5" fill="#3a9648" transform="rotate(-20 16 20)"/>
+          <ellipse cx="28" cy="20" rx="5" ry="3.5" fill="#3a9648" transform="rotate(20 28 20)"/>
+        </svg>
+        <div class="logo-name"><span class="logo-top">BRONSLEY</span><span class="logo-bot">Community Resource Center</span></div>
+      </div>
+      <p class="footer-p">Empowering youth and enriching Los Angeles through mentorship, monthly food giveaways, and the Rooted &amp; Rising Urban Farm.</p>
+      <div class="soc-row"><div class="soc">ig</div><div class="soc">fb</div><div class="soc">yt</div></div>
+    </div>
+    <div>
+      <div class="footer-h">Programs</div>
+      <a class="footer-a" onclick="show('programs')">Youth Programs</a>
+      <a class="footer-a" onclick="show('farm')">Rooted &amp; Rising Farm</a>
+      <a class="footer-a" onclick="show('giveaway')">Food Giveaway</a>
+      <a class="footer-a" onclick="show('involved')">Get Involved</a>
+    </div>
+    <div>
+      <div class="footer-h">Organization</div>
+      <a class="footer-a" onclick="show('about')">About Us</a>
+      <a class="footer-a" onclick="show('bio')">Founder Bio</a>
+      <a class="footer-a" onclick="show('board')">Board Members</a>
+      <a class="footer-a" onclick="show('mission')">Mission</a>
+      <a class="footer-a" onclick="show('partners')">Partners</a>
+    </div>
+    <div>
+      <div class="footer-h">Contact</div>
+      <p class="footer-p" style="margin-bottom:5px;">1-(424) 480-9336</p>
+      <p class="footer-p" style="margin-bottom:5px;">401 E. Hillcrest, Unit K<br>Inglewood, CA 90301</p>
+      <p class="footer-p">@bronsleyla</p>
+      <button class="nav-donate-cta" style="margin-top:12px;" onclick="show('donate')">Donate</button>
+    </div>
+  </div>
+  <div class="footer-bot">
+    <span>© 2025 Bronsley Community Resource Center · All rights reserved</span>
+    <span>Privacy Policy · Terms &amp; Conditions</span>
+  </div>
+</footer>
+
+<script>
+// Page navigation
+function show(id){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  var el=document.getElementById('page-'+id);
+  if(el){
+    el.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  closeMenu();
+}
+
+// Mobile menu
+function toggleMenu(){
+  var m=document.getElementById('mobileMenu');
+  m.classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// Donation amount buttons
+function setAmt(btn,val){
+  document.querySelectorAll('.amt-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  document.getElementById('other-amt-wrap').style.display=val==='other'?'block':'none';
+}
+
+// Anonymous toggle
+function toggleAnon(){
+  var chk=document.getElementById('anon-chk');
+  document.getElementById('display-name-wrap').style.display=chk.checked?'none':'block';
+}
+
+// Donation submit
+function submitDonation(){
+  var s=document.getElementById('donate-success');
+  s.style.display='block';
+  s.scrollIntoView({behavior:'smooth'});
+}
+
+// Close dropdowns when clicking outside
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.nav-item')&&!e.target.closest('.hamburger')){
+    closeMenu();
+  }
+});
+</script>
+</body>
+</html>
