@@ -332,6 +332,21 @@ p{font-size:clamp(13px,2vw,15px);line-height:1.8;color:var(--muted);}
 .soc-row{display:flex;gap:8px;margin-top:12px;}
 .soc{width:30px;height:30px;border:0.5px solid rgba(255,255,255,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(255,255,255,0.7);cursor:pointer;}
 
+
+/* ============================
+   PHOTOS & VIDEO
+   ============================ */
+.founder-photo{position:relative;border-radius:var(--radius) var(--radius) 0 0;overflow:hidden;background:linear-gradient(145deg,var(--blue),var(--green-dark));min-height:300px;display:flex;align-items:center;justify-content:center;}
+.founder-photo img{position:relative;z-index:2;width:100%;height:auto;display:block;}
+.founder-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;}
+.gallery figure{margin:0;overflow:hidden;border-radius:var(--radius);background:#000;}
+.gallery img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .4s;}
+.gallery figure:hover img{transform:scale(1.04);}
+.gallery figcaption{font-size:12px;color:var(--muted);background:#fff;padding:9px 12px;line-height:1.5;}
+.video-wrap{max-width:760px;margin:28px auto 0;border-radius:var(--radius);overflow:hidden;background:#000;box-shadow:0 4px 18px rgba(0,0,0,.2);}
+.video-wrap video{width:100%;display:block;}
+
 /* ============================
    UTILITY
    ============================ */
@@ -344,6 +359,7 @@ p{font-size:clamp(13px,2vw,15px);line-height:1.8;color:var(--muted);}
    RESPONSIVE BREAKPOINTS
    ============================ */
 @media(max-width:900px){
+  .gallery{grid-template-columns:repeat(2,1fr);}
   .grid-3{grid-template-columns:repeat(2,1fr);}
   .grid-4{grid-template-columns:repeat(2,1fr);}
   .stat-row{grid-template-columns:repeat(2,1fr);}
@@ -358,6 +374,7 @@ p{font-size:clamp(13px,2vw,15px);line-height:1.8;color:var(--muted);}
   .contact-grid{grid-template-columns:1fr;}
 }
 @media(max-width:600px){
+  .gallery{grid-template-columns:1fr;}
   .nav-links{display:none;}
   .hamburger{display:flex;}
   .grid-3{grid-template-columns:1fr;}
@@ -480,7 +497,7 @@ p{font-size:clamp(13px,2vw,15px);line-height:1.8;color:var(--muted);}
 <div class="page active" id="page-home">
   <div class="hero" role="banner">
     <div class="hero-slides">
-      <div class="hslide" style="background:linear-gradient(135deg,#0f3460,#1a4f8a);">
+      <div class="hslide" style="background:linear-gradient(135deg,rgba(15,52,96,.82),rgba(26,79,138,.78)),url(images/giveaway-tent.jpg) center/cover;">
         <div class="htag">Bronsley Community Resource Center · Los Angeles</div>
         <h1 class="htitle">Empowering Youth, Enriching Our Community</h1>
         <p class="hsub">Mentorship, monthly food giveaways, urban farming, and programs — rooted in love for LA.</p>
@@ -492,7 +509,7 @@ p{font-size:clamp(13px,2vw,15px);line-height:1.8;color:var(--muted);}
         <p class="hsub">Youth learn to grow, harvest, and share fresh produce through our urban community farm.</p>
         <div class="hbtns"><button class="btn-gold" onclick="show('farm')">Visit the Farm</button><button class="btn-outline-w" onclick="show('involved')">Volunteer</button></div>
       </div>
-      <div class="hslide" style="background:linear-gradient(135deg,#0f3460,#1e5228);">
+      <div class="hslide" style="background:linear-gradient(135deg,rgba(15,52,96,.8),rgba(30,82,40,.8)),url(images/produce-tables.jpg) center/cover;">
         <div class="htag">3rd Saturday Every Month</div>
         <h1 class="htitle">Community Food Giveaway — Everyone Welcome</h1>
         <p class="hsub">Free groceries for LA families every third Saturday. No paperwork, no barriers — just community.</p>
@@ -523,6 +540,19 @@ p{font-size:clamp(13px,2vw,15px);line-height:1.8;color:var(--muted);}
       <div class="card"><div class="card-icon">🛒</div><div class="card-title">Monthly Food Giveaway</div><div class="card-text">Every 3rd Saturday — free groceries for families in need. No barriers, all welcome.</div></div>
       <div class="card"><div class="card-icon">🎓</div><div class="card-title">Youth Programs</div><div class="card-text">Tutoring, mentorship, leadership, and life skills — building capable young Angelenos.</div></div>
     </div>
+  </div>
+
+  <div class="section sec-blue-light text-center">
+    <div class="section-tag">Bronsley in Action</div>
+    <h2>Neighbors Helping Neighbors</h2>
+    <div class="divider-gold-c"></div>
+    <p style="max-width:600px;margin:0 auto;">Every 3rd Saturday our volunteers check in families, hand out fresh produce, and make sure no one leaves empty-handed.</p>
+    <div class="gallery">
+      <figure><img src="images/team-checkin-table.jpg" alt="Bronsley volunteers smiling at the check-in table" loading="lazy"><figcaption>Our volunteer team at check-in</figcaption></figure>
+      <figure><img src="images/produce-tables.jpg" alt="Volunteers handing out fresh produce under tents" loading="lazy"><figcaption>Fresh produce for every family</figcaption></figure>
+      <figure><img src="images/giveaway-tent.jpg" alt="Giveaway tables set up under canopy tents" loading="lazy"><figcaption>Monthly giveaway setup</figcaption></figure>
+    </div>
+    <div style="margin-top:22px;"><button class="btn-gold" onclick="show('giveaway')">See the Giveaway</button></div>
   </div>
 
   <div class="section sec-blue text-center">
@@ -569,21 +599,34 @@ p{font-size:clamp(13px,2vw,15px);line-height:1.8;color:var(--muted);}
 <div class="page" id="page-bio">
   <div class="section sec-cream">
     <div class="bio-grid">
-      <div style="background:linear-gradient(145deg,var(--blue),var(--green-dark));padding:clamp(28px,5vw,48px) 28px;text-align:center;color:#fff;border-radius:var(--radius);">
-        <div style="font-size:clamp(48px,8vw,72px);font-weight:300;margin-bottom:8px;">B</div>
-        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:0.7;">Founder Photo</div>
-        <div style="margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.2);font-size:12px;line-height:1.7;opacity:0.85;">Founder &amp; Executive Director<br>Bronsley Community Resource Center</div>
+      <div>
+        <!-- FOUNDER PHOTO: upload a photo named founder.jpg into the images folder and it appears here automatically -->
+        <div class="founder-photo">
+          <img src="images/founder.jpg" alt="Nawakkii &quot;Nikki&quot; Jones, Founder and Executive Director of Bronsley Community Resource Center" onerror="this.style.display='none'">
+          <div class="founder-fallback">
+            <div style="font-size:clamp(48px,8vw,72px);font-weight:300;margin-bottom:8px;">N</div>
+            <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:0.7;">Founder Photo</div>
+          </div>
+        </div>
+        <div style="background:var(--blue-dark);color:#fff;padding:18px 20px;border-radius:0 0 var(--radius) var(--radius);text-align:center;">
+          <div style="font-size:14px;font-weight:700;">Nawakkii &ldquo;Nikki&rdquo; Jones</div>
+          <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-top:4px;">Founder &amp; Executive Director</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">
+          <div style="background:var(--green-light);padding:14px 10px;text-align:center;border-radius:var(--radius);"><div style="font-size:22px;font-weight:700;color:var(--green-dark);">20+</div><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);">Years Working With Youth</div></div>
+          <div style="background:var(--blue-light);padding:14px 10px;text-align:center;border-radius:var(--radius);"><div style="font-size:22px;font-weight:700;color:var(--blue-dark);">2016</div><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);">CD 9 SHERO Honoree</div></div>
+        </div>
       </div>
       <div>
         <div class="section-tag">Founder &amp; Executive Director</div>
-        <h2>A Heart for the Community</h2>
+        <h2>Nawakkii &ldquo;Nikki&rdquo; Jones</h2>
         <div class="divider-gold"></div>
-        <p style="margin-bottom:14px;">The founder of Bronsley Community Resource Center grew up witnessing the inequities faced by young people in Los Angeles — unequal access to mentorship, nutritious food, and safe spaces to grow. Driven by a deep belief that every child deserves the opportunity to thrive, she set out to build something lasting in the heart of the community she loves.</p>
-        <p style="margin-bottom:14px;">With a background in community organizing, youth advocacy, and nonprofit leadership, she launched Bronsley in 2024 with a clear vision: create a center where Los Angeles youth could access real resources, real mentors, and real hope. In just one year, Bronsley has served over 5,000 people across the greater LA area.</p>
-        <p style="margin-bottom:14px;">From organizing monthly grocery giveaways to building the Rooted &amp; Rising urban farm that reconnects youth with the land, the founder's heart is in every program Bronsley offers. She believes in meeting people where they are, listening before acting, and building bridges across schools, families, and organizations.</p>
-        <p class="quote-block">"This community gave me everything. Bronsley is my way of giving it back — not just for today, but for every generation that comes after us."</p>
+        <p style="margin-bottom:14px;">Nawakkii &ldquo;Nikki&rdquo; Jones is the founder of Bronsley Community Resource Center, a grassroots organization created to meet a need she saw firsthand: young people in her community who needed someone in their corner. Through the Center, Nikki supports youth in any capacity she can, from college applications and scholarship assistance to mentoring and simply being a shoulder to lean on.</p>
+        <p style="margin-bottom:14px;">For more than 20 years, Nikki has worked with youth in a variety of roles, including sports, community service projects, tutoring, and mentorship. Her commitment to the community has been widely recognized. In 2016, she was honored as a CD 9 SHERO for her work with homeless families.</p>
+        <p style="margin-bottom:14px;">Nikki leads with kindness and grace in every situation and believes that strong communities are built through collaboration. Over the past year and a half, she has grown Bronsley Community Resource Center through grassroots efforts, and she is proud of what the community has built together. She looks forward to developing new partnerships and expanding the support system available to the youth she serves.</p>
         <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;">
           <button class="btn-gold" onclick="show('mission')" style="background:var(--green);">Our Mission</button>
+          <button class="btn-gold" onclick="show('partners')">Become a Partner</button>
         </div>
       </div>
     </div>
@@ -716,6 +759,23 @@ p{font-size:clamp(13px,2vw,15px);line-height:1.8;color:var(--muted);}
         </div>
       </div>
     </div>
+  </div>
+  <div class="section sec-blue-light text-center">
+    <div class="section-tag">From the Giveaway</div>
+    <h2>See It In Action</h2>
+    <div class="divider-gold-c"></div>
+    <div class="gallery">
+      <figure><img src="images/onions-volunteer.jpg" alt="Volunteer at a table of fresh onions and potatoes" loading="lazy"><figcaption>Fresh onions, potatoes, and more</figcaption></figure>
+      <figure><img src="images/volunteers-checkin.jpg" alt="Volunteers checking in neighbors under a tent" loading="lazy"><figcaption>Check-in under the tent</figcaption></figure>
+      <figure><img src="images/produce-tables.jpg" alt="Tables stocked with beets, garlic, squash, and greens" loading="lazy"><figcaption>Beets, garlic, squash, and greens</figcaption></figure>
+    </div>
+    <div class="video-wrap">
+      <video controls preload="none" playsinline poster="images/giveaway-video-poster.jpg">
+        <source src="images/giveaway-video.mp4" type="video/mp4">
+        Your browser does not support video playback.
+      </video>
+    </div>
+    <p style="font-size:12px;margin-top:10px;">Watch volunteers serve the community on giveaway day.</p>
   </div>
 </div>
 
